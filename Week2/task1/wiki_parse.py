@@ -74,7 +74,7 @@ def parse(path_to_file):
         headers = get_headers_first_letter_ETC(soup)
         link_len = get_max_length_link_sequence(soup)
         list_count = get_lists(soup)
-        return [imgs, headers, link_len, list_count]
+    return [imgs, headers, link_len, list_count]
 
 
 class TestParse(unittest.TestCase):
