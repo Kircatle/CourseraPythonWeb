@@ -32,7 +32,6 @@ def get_headers_first_letter_ETC(soup):
 def get_max_length_link_sequence(soup):
     max_len = 0
     tmp_len = 0
-    soup_child = soup.content
     tag = soup.find_next('a')
     dec = soup.descendants
     while True:
@@ -57,8 +56,14 @@ def get_max_length_link_sequence(soup):
 def get_lists(soup):
     count_lists = 0
     lists = soup.find_all(['ul', 'ol'])
-    for list in lists:
-        if 'ul' in list.parents
+    for list_tag in lists:
+        parents = [parent.name for parent in list_tag.parents]
+        if 'ol' in parents or 'ul' in parents:
+            continue
+        else:
+            count_lists += 1
+    return count_lists
+
 
 def parse(path_to_file):
     with open(path_to_file, encoding='utf-8') as website:
@@ -68,7 +73,8 @@ def parse(path_to_file):
         imgs = get_image_count_more_200_width(soup)
         headers = get_headers_first_letter_ETC(soup)
         link_len = get_max_length_link_sequence(soup)
-        print(imgs, headers, link_len)
+        list_count = get_lists(soup)
+        return [imgs, headers, link_len, list_count]
 
 
 class TestParse(unittest.TestCase):
