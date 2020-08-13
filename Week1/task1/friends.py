@@ -71,4 +71,5 @@ def calc_age(uid):
 
 
 if __name__ == "__main__":
-    calc_age("1")
+    age = calc_age("id189128094")
+    print(age)
