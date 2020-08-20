@@ -48,4 +48,9 @@ having count(distinct `product_id`) = 1;
 select * from sale where total = (select max(total) from sale);
 
 -- 10. Выведите дату самых максимальных продаж, если таких дат несколько, то самую раннюю из них
-select date from sale where total = (select max(total) from sale) limit 1;
+select date
+from sale
+where total = (
+    select max(total) from sale)
+order by date ASC 
+limit 1;
