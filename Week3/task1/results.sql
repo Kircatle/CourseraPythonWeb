@@ -45,7 +45,10 @@ group by store_id
 having count(distinct `product_id`) = 1;
 
 -- 9. Выберите все ряды (все поля) из продаж, в которых сумма продажи (total) максимальна (равна максимальной из всех встречающихся)
-select * from sale where total = (select max(total) from sale);
+select * 
+from sale
+where total = (
+    select max(total) from sale);
 
 -- 10. Выведите дату самых максимальных продаж, если таких дат несколько, то самую раннюю из них
 select date
