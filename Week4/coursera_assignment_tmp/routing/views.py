@@ -20,22 +20,26 @@ def sum_route(request, num1, num2):
 
 @require_GET
 def sum_get_method(request):
-    a = request.GET['a']
-    b = request.GET['b']
     try:
+        a = request.POST['a']
+        b = request.POST['b']
         return HttpResponse(int(a)+int(b), status="200")
     except ValueError:
+        return HttpResponse(status="400") 
+    except KeyError:
         return HttpResponse(status="400") 
 
 
 @csrf_exempt
 @require_POST
 def sum_post_method(request):
-    a = request.POST['a']
-    b = request.POST['b']
     try:
+        a = request.POST['a']
+        b = request.POST['b']
         return HttpResponse(int(a)+int(b), status="200")
     except ValueError:
+        return HttpResponse(status="400") 
+    except KeyError:
         return HttpResponse(status="400") 
 
 
